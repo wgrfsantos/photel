@@ -28,11 +28,11 @@
 					<hr/>
 					<table class="table">
 						<thead class="thead-light">
-							<tr>
-								<th>Visualizar</th>
-								<th>Adicionar</th>
-								<th>Editar</th>
-								<th>Excluir</th>
+							<tr style="text-transform: uppercase;">
+								<th class="bg-primary">Visualizar</th>
+								<th class="bg-success">Adicionar</th>
+								<th class="bg-warning">Editar</th>
+								<th class="bg-danger">Excluir</th>
 							</tr>
 						</thead>
 						<tbody>
