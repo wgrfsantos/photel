@@ -11,9 +11,9 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="<?= BASE_URL; ?>assets/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?= BASE_URL; ?>assets/adminlte/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="<?= BASE_URL; ?>assets/css/template.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -196,18 +196,19 @@
           <b>Versão</b> 0.0.1
         </div>
         <!-- conteúdo da esquerda -->
-        <strong>Copyright &copy; 2019-<?php echo date('Y'); ?> <a href="https://www.wvsoft.com.br">WVsoft</a>.</strong> Todos os direitos reservados.
+        <strong>Copyright &copy; 2019-<?php echo date('Y'); ?> <a href="">Projeto Hotel</a>.</strong> Todos os direitos reservados.
       </footer>
     </div>
  
   <!-- SCRIPTS NECESSÁRIOS -->
 
   <!-- jQuery -->
-  <script src="<?php echo BASE_URL; ?>assets/adminlte/plugins/jquery/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Bootstrap 4 -->
-  <script src="<?php echo BASE_URL; ?>assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="<?php echo BASE_URL; ?>assets/adminlte/dist/js/adminlte.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+
   <script src="<?php echo BASE_URL; ?>assets/js/script.js"></script>
   </body>
 </html>
