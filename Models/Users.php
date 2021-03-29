@@ -64,7 +64,7 @@ class Users extends Model {
 
 	public function validateLogin($email, $password) {
 
-		$sql = "SELECT id FROM users WHERE email = :email AND password = :password AND admin = 1";
+		$sql = "SELECT id FROM users WHERE email = :email AND password = :password AND users.admin = 1";
 		$sql = $this->db->prepare($sql);
 		$sql->bindValue(':email', $email);
 		$sql->bindValue(':password', md5($password));
@@ -149,7 +149,7 @@ class Users extends Model {
 	//Contagem de usuários ativos
 	public function getAllUsersCountActive() {
 
-		$sql = $this->db->query("SELECT COUNT(*) as c FROM users WHERE admin = 1");
+		$sql = $this->db->query("SELECT COUNT(*) as c FROM users WHERE users.admin = 1");
 		$row = $sql->fetch();
 		return $row['c'];
     }
@@ -224,7 +224,12 @@ class Users extends Model {
         $sql->execute();
 
         if($sql->rowCount() == 0) {
-            $sql = "INSERT INTO users SET name = :name, email = :email, id_permission = :id_permission, admin = :admin, password = :password";
+            $sql = "INSERT INTO users
+										SET name = :name,
+										email = :email,
+										id_permission = :id_permission,
+										users.admin = :admin,
+										password = :password";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":name", $name);
             $sql->bindValue(":email", $email);
@@ -241,7 +246,12 @@ class Users extends Model {
     }
 
      public function editUser($name, $email, $id_permission, $admin, $id) {
-        $sql = "UPDATE users SET name = :name, email = :email, id_permission = :id_permission, admin = :admin WHERE id = :id";
+        $sql = "UPDATE users SET
+								name = :name,
+								email = :email,
+								id_permission = :id_permission,
+								users.admin = :admin
+								WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":name", $name);
         $sql->bindValue(":email", $email);
