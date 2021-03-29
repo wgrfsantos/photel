@@ -9,7 +9,7 @@ class Users extends Model {
 	private $uid;
 	private $permissions;
 	private $userName;
-	private $isAdmin;	
+	private $isAdmin;
 
 	public function isLogged() {
 
@@ -42,7 +42,7 @@ class Users extends Model {
 		return $this->userName;
 	}
 
-	
+
 
 	public function isAdmin() {
 		if($this->isAdmin == '1') {
@@ -60,7 +60,7 @@ class Users extends Model {
 			return false;
 		}
 
-	}	
+	}
 
 	public function validateLogin($email, $password) {
 
@@ -121,7 +121,7 @@ class Users extends Model {
 	public function getTotal($filter = array()) {
 		$array = array();
 
-		$sqlfilter = $this->buildGetFilterSql($filter);		
+		$sqlfilter = $this->buildGetFilterSql($filter);
 
 		$sql = "SELECT COUNT(*) as c FROM users";
 		if(count($sqlfilter) > 0) {
@@ -158,10 +158,10 @@ class Users extends Model {
 	 public function getAllUsers($id) {
 		$array = array();
 
-		$sql = "SELECT * FROM users WHERE id = :id";		
+		$sql = "SELECT * FROM users WHERE id = :id";
 		$sql = $this->db->prepare($sql);
 		$sql->bindValue(':id', $id);
-		$sql->execute();		
+		$sql->execute();
 
 		if($sql->rowCount() > 0) {
 			$array = $sql->fetch(\PDO::FETCH_ASSOC);
@@ -189,14 +189,14 @@ class Users extends Model {
 		$sqlfilter = $this->buildGetFilterSql($filter);
 
 		$sql = "SELECT
-					users.id,
-					users.name,
-					users.email,
-					users.admin,
-					permission_groups.name as permission_name
-				FROM users
-				LEFT JOIN permission_groups
-				ON permission_groups.id = users.id_permission";
+		            users.id,
+		            users.name,
+		            users.email,
+		            users.admin,
+		            permission_groups.name as permission_name
+		        FROM users
+		        LEFT JOIN permission_groups
+		        ON permission_groups.id = users.id_permission";
 
 		if(count($sqlfilter) > 0) {
 			$sql .= " WHERE ".implode(' AND ', $sqlfilter);
@@ -224,12 +224,12 @@ class Users extends Model {
         $sql->execute();
 
         if($sql->rowCount() == 0) {
-            $sql = "INSERT INTO users
-										SET name = :name,
-										email = :email,
-										id_permission = :id_permission,
-										users.admin = :admin,
-										password = :password";
+            $sql = "INSERT INTO users SET
+			        name = :name,
+			        email = :email,
+			        id_permission = :id_permission,
+			        users.admin = :admin,
+			        password = :password";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":name", $name);
             $sql->bindValue(":email", $email);
@@ -247,11 +247,11 @@ class Users extends Model {
 
      public function editUser($name, $email, $id_permission, $admin, $id) {
         $sql = "UPDATE users SET
-								name = :name,
-								email = :email,
-								id_permission = :id_permission,
-								users.admin = :admin
-								WHERE id = :id";
+		        name = :name,
+		        email = :email,
+		        id_permission = :id_permission,
+		        users.admin = :admin
+		        WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":name", $name);
         $sql->bindValue(":email", $email);
@@ -261,17 +261,17 @@ class Users extends Model {
         $sql->execute();
 
 	}
-	
+
 	public function deleteUser($id_user) {
 		$sql = "DELETE FROM users WHERE id = :id_user";
 		$sql = $this->db->prepare($sql);
 		$sql->bindValue(':id_user', $id_user);
-		$sql->execute();		
+		$sql->execute();
 
 	}
 
 	public function newPassUser($password, $id) {
-		 $sql = "UPDATE users SET password = :password WHERE id = :id";
+		$sql = "UPDATE users SET password = :password WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":password", md5($password));
         $sql->bindValue(':id', $id);
