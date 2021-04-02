@@ -8,7 +8,6 @@
     autoloader="config.php"
 >
     <projectFiles>
-        <file name="config.php" />
         <file name="environment.php" />
         <file name="index.php" />
         <directory name="Controllers" />
@@ -16,7 +15,6 @@
         <directory name="Models" />
         <ignoreFiles>
             <directory name="vendor" />
-            <directory name="node_modules" />
             <!-- Ignoring Template file scope error-->
             <file name="Views/template.php" />
         </ignoreFiles>

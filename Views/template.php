@@ -80,7 +80,7 @@
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Adicione ícones aos links usando o .nav-icon class com font-awesome ou qualquer outra biblioteca de fontes de ícones -->
 
-                <?php if( $viewData['user']->hasPermission('calendar_view') ): ?>
+                <?php if ($viewData['user']->hasPermission('calendar_view')) : ?>
                   <li class="nav-item">
                     <a href="<?php echo BASE_URL; ?>calendar" class="nav-link">
                     <i class="nav-icon fas fa-project-diagram"></i>
@@ -90,7 +90,7 @@
                   </li>
                 <?php endif; ?>
 
-                <?php if( $viewData['user']->hasPermission('hosting_view') ): ?>
+                <?php if ($viewData['user']->hasPermission('hosting_view')) : ?>
                   <li class="nav-item">
                     <a href="<?php echo BASE_URL; ?>hosting" class="nav-link">
                     <i class="nav-icon fas fa-bed"></i>
@@ -109,7 +109,7 @@
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <?php if( $viewData['user']->hasPermission('management_view') ): ?>
+                    <?php if ($viewData['user']->hasPermission('management_view')) : ?>
                       <li class="nav-item">
                         <a href="<?php echo BASE_URL; ?>management" class="nav-link">
                         <i class="nav-icon fas fa-hotel"></i>
@@ -118,7 +118,7 @@
                         </a>
                       </li>
                     <?php endif; ?>
-                    <?php if( $viewData['user']->hasPermission('bedrooms_view') ): ?>
+                    <?php if ($viewData['user']->hasPermission('bedrooms_view')) : ?>
                       <li class="nav-item">
                         <a href="<?php echo BASE_URL; ?>bedrooms" class="nav-link">
                         <i class="nav-icon fas fa-door-open"></i>                        
@@ -128,7 +128,7 @@
                       </li>
                     <?php endif; ?>
 
-                    <?php if( $viewData['user']->hasPermission('products_view') ): ?>
+                    <?php if ($viewData['user']->hasPermission('products_view')) : ?>
                       <li class="nav-item">
                         <a href="<?php echo BASE_URL; ?>products" class="nav-link">
                         <i class="nav-icon fas fa-cubes"></i>
@@ -137,7 +137,7 @@
                       </li>
                     <?php endif; ?>
 
-                    <?php if( $viewData['user']->hasPermission('services_view') ): ?>
+                    <?php if ($viewData['user']->hasPermission('services_view')) : ?>
                       <li class="nav-item">
                         <a href="<?php echo BASE_URL; ?>services" class="nav-link">
                         <i class="nav-icon fas fa-concierge-bell"></i>
@@ -146,7 +146,7 @@
                       </li>
                     <?php endif; ?>
 
-                    <?php if( $viewData['user']->hasPermission('users_view') ): ?>
+                    <?php if ($viewData['user']->hasPermission('users_view')) : ?>
                       <li class="nav-item">
                         <a href="<?php echo BASE_URL; ?>users" class="nav-link">
                           <i class="nav-icon fas fa-users"></i>
@@ -155,7 +155,7 @@
                       </li>
                     <?php endif; ?>
 
-                    <?php if( $viewData['user']->hasPermission('permissions_view') ): ?>
+                    <?php if ($viewData['user']->hasPermission('permissions_view')) : ?>
                       <li class="nav-item">
                         <a href="<?php echo BASE_URL; ?>permissions" class="nav-link">
                           <i class="nav-icon fas fa-lock"></i>

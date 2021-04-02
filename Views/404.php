@@ -1,1 +1,4 @@
+<?php
+
+?>
 Página não encontrada!

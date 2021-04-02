@@ -17,6 +17,7 @@
     "css-lint": "stylelint assets/css",
     "css-autofix": "stylelint --fix assets/css",
     "js-lint": "eslint assets/js",
-    "js-autofix": "eslint --fix assets/js"
+    "js-autofix": "eslint --fix assets/js",
+    "test": "eslint assets/js && stylelint assets/css"
   }
 }
