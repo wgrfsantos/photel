@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+    <!--Show Progress and Sniffers code names -->
+    <arg value="sp" />
+
+    <!--Add colors-->
+    <arg name="colors" />
+
+    <!--Only PHP files-->
+    <arg name="extensions" value="php" />
+
+    <!--Current Directory-->
+    <file>.</file>
+
+    <!--Exclude dependency folders from Composer and NPM/Yarn-->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+    <!--Set PSR12 Rules-->
+    <rule ref="PSR12" />
+
+    <!--Dont check side effects and definitions in config.php-->
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols" >
+        <exclude-pattern>config.php</exclude-pattern>
+    </rule>
+
+    <!--Dont check Camel Case for Controllers-->
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>*/Controllers/*</exclude-pattern>
+    </rule>
+
+    <!--Dont check line length for Views-->
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>*/Views/*</exclude-pattern>
+    </rule>
+</ruleset>

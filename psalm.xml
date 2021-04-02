@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="4"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    autoloader="config.php"
+>
+    <projectFiles>
+        <file name="environment.php" />
+        <file name="index.php" />
+        <directory name="Controllers" />
+        <directory name="Core" />
+        <directory name="Models" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <!-- Ignoring Template file scope error-->
+            <file name="Views/template.php" />
+        </ignoreFiles>
+    </projectFiles>
+</psalm>

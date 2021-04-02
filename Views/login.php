@@ -27,13 +27,13 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Área restrita</p>
-      	<!--Avisos de Login-->
-      	<?php if(!empty($error)): ?>
-	    	<div class="btn btn-danger btn-block text-center">
-	    		<p><?php echo $error; ?></p>
-	    	</div>
-    	<?php endif; ?>
-    	<br>
+        <!--Avisos de Login-->
+        <?php if (!empty($error)) : ?>
+            <div class="btn btn-danger btn-block text-center">
+                <p><?php echo $error; ?></p>
+            </div>
+        <?php endif; ?>
+        <br>
       <form action="<?php echo BASE_URL; ?>login/index_action" method="post">
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control" placeholder="Email">
