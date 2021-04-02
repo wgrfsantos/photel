@@ -1,0 +1,52 @@
+name: Lint PHP, CSS and JS files
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  lint-php:
+    name: Lint PHP Files
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with: 
+          php-version: 7.4
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --no-check-publish
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Lint PHP syntax
+        run: ./ci-phplint
+
+      - name: Check PSR12 Standard
+        run: composer phpcs
+
+      - name: Analyse PHP files
+        run: composer psalm
+  
+  lint-node:
+    name: Lint CSS and JS files
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with: 
+          node-version: 12
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: CSS lint
+        run: yarn css-lint
+
+      - name: JS lint
+        run: yarn js-lint
