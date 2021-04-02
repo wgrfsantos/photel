@@ -10,10 +10,10 @@ Management system for hotels and accommodations.
 
 For running this system, you must need:
 
-- [Apache](https://httpd.apache.org/)
-- [PHP](https://www.php.net/)
-- [MySQL](https://www.mysql.com/)
-- [Composer](https://getcomposer.org/)
+-   [Apache](https://httpd.apache.org/)
+-   [PHP](https://www.php.net/)
+-   [MySQL](https://www.mysql.com/)
+-   [Composer](https://getcomposer.org/)
 
 ## Setup
 

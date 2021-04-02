@@ -2,6 +2,9 @@
 /vendor/
 composer.phar
 
+#Ignore node_modules
+/node_modules/
+
 # Optional, ignore composer lock
 # composer.lock
 
