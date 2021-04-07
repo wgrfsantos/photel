@@ -43,7 +43,7 @@
 
                 <div class="info-box-content">
                   <span><strong>QUARTO I</strong></span><br>
-                  <span style="font-size: 14px;"><strong>Status:</strong> Oculpado</span><br>
+                  <span style="font-size: 14px;"><strong>Status:</strong> Ocupado</span><br>
                   <span style="font-size: 13px;"><strong>Entrada:</strong>28/03/2020<strong> Saida:</strong>02/04/2020</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -142,7 +142,7 @@
 
                 <div class="info-box-content">
                   <span><strong>QUARTO I</strong></span><br>
-                  <span style="font-size: 14px;"><strong>Status:</strong> Oculpado</span><br>
+                  <span style="font-size: 14px;"><strong>Status:</strong> Ocupado</span><br>
                   <span style="font-size: 13px;"><strong>Entrada:</strong>28/03/2020<strong> Saida:</strong>02/04/2020</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -170,7 +170,7 @@
 
                 <div class="info-box-content">
                   <span><strong>QUARTO I</strong></span><br>
-                  <span style="font-size: 14px;"><strong>Status:</strong> Oculpado</span><br>
+                  <span style="font-size: 14px;"><strong>Status:</strong> Ocupado</span><br>
                   <span style="font-size: 13px;"><strong>Entrada:</strong>28/03/2020<strong> Saida:</strong>02/04/2020</span>
                 </div>
                 <!-- /.info-box-content -->
