@@ -5,8 +5,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    autoloader="config.php"
 >
+    <globals>
+        <var name="db" type="PDO" />
+    </globals>
     <projectFiles>
         <file name="environment.php" />
         <file name="index.php" />
@@ -19,4 +21,5 @@
             <file name="Views/template.php" />
         </ignoreFiles>
     </projectFiles>
+    <stubs><file name="config.sample.php" /></stubs>
 </psalm>
