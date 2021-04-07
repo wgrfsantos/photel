@@ -21,7 +21,7 @@ if (ENVIRONMENT == 'development') {
     $config['dbpass'] = '';
 }
 
-global $db;
+$db;
 try {
     $db = new PDO(
         "mysql:dbname=" . $config['dbname'] .
