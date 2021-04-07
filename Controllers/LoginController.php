@@ -25,7 +25,7 @@ class LoginController extends Controller
     public function index_action()
     {
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
-            $email = $_POST['email'];
+            $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
             $password = $_POST['password'];
 
             $u = new Users();
