@@ -2,28 +2,17 @@
 
 namespace Controllers;
 
-use Core\Controller;
-use Models\Users;
+use Controllers\PrivateRoute;
 use Models\Services;
 
-class ServicesController extends Controller
+class ServicesController extends PrivateRoute
 {
-
-    private $user;
-    private $arrayInfo;
 
     public function __construct()
     {
-        $this->user = new Users();
+        parent::__construct();
 
-        if (!$this->user->isLogged()) {
-            header("Location: " . BASE_URL . "login");
-            exit;
-        }
-        $this->arrayInfo = array(
-            'user' => $this->user,
-            'menuActive' => 'services'
-        );
+        $this->arrayInfo['menuActive'] = 'services';
     }
 
     public function index()

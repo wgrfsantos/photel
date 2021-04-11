@@ -2,36 +2,21 @@
 
 namespace Controllers;
 
-use Core\Controller;
-use Models\Users;
-use Models\Permissions;
+use Controllers\PrivateRoute;
 
-class HomeController extends Controller
+class HomeController extends PrivateRoute
 {
 
-    private $user;
-    private $arrayInfo;
 
     public function __construct()
     {
-        $this->user = new Users();
+        parent::__construct();
 
-        if (!$this->user->isLogged()) {
-            header("Location: " . BASE_URL . "login");
-            exit;
-        }
-
-        $this->arrayInfo = array(
-            'user' => $this->user,
-            'menuActive' => 'home'
-        );
+        $this->arrayInfo['menuActive'] = 'home';
     }
 
     public function index()
     {
-
-
-
         $this->loadTemplate('home', $this->arrayInfo);
     }
 }
