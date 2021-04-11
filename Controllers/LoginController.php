@@ -24,8 +24,8 @@ class LoginController extends Controller
 
     public function index_action()
     {
-        $email = (filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL) );
-        $password = (filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW) );
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
         $user = new Users();
 
         if ($email && $password && $user->validateLogin($email, $password)) {
@@ -35,7 +35,7 @@ class LoginController extends Controller
         $_SESSION['errorMsg'] = ($email && $password) ?
                                 'Usuário e/ou senha incorretos' :
                                 'Preencha os campos adequadamente';
-        header('Location:' . BASE_URL . 'Login');
+        header('Location:' . BASE_URL . 'login');
         exit;
     }
 
