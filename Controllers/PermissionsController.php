@@ -2,34 +2,18 @@
 
 namespace Controllers;
 
-use Core\Controller;
-use Models\Users;
+use Controllers\PrivateRoute;
 use Models\Permissions;
 
-class PermissionsController extends Controller
+class PermissionsController extends PrivateRoute
 {
 
-    private $user;
-    private $arrayInfo;
 
     public function __construct()
     {
-        $this->user = new Users();
+        parent::__construct();
 
-        if (!$this->user->isLogged()) {
-            header("Location: " . BASE_URL . "login");
-            exit;
-        }
-
-        if (!$this->user->hasPermission('permissions_view')) {
-            header("Location: " . BASE_URL);
-            exit;
-        }
-
-        $this->arrayInfo = array(
-            'user' => $this->user,
-            'menuActive' => 'permissions'
-        );
+        $this->arrayInfo['menuActive'] = 'permissions';
     }
 
     public function index()
