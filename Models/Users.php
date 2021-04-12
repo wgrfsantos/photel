@@ -3,81 +3,86 @@
 namespace Models;
 
 use Core\Model;
-use Models\Permissions;
+use PDO;
+use PDOStatement;
 
 class Users extends Model
 {
 
-    private $uid;
-    private $permissions;
-    private $userName;
-    private $isAdmin;
+    public const ADMIN = 1;
 
-    public function isLogged()
+    private ?string $uid;
+
+    /**
+     * @var string[]|null $permissions
+     */
+    private ?array $permissions;
+    private ?string $userName;
+    private ?int $isAdmin;
+
+    public function isLogged(): bool
     {
-
-        if (!empty($_SESSION['token'])) {
-            $token = $_SESSION['token'];
-
-            $sql = "SELECT * FROM users WHERE token = :token";
-            $sql = $this->db->prepare($sql);
-            $sql->bindValue(':token', $token);
-            $sql->execute();
-
-            if ($sql->rowCount() > 0) {
-                $p = new Permissions();
-
-                $data = $sql->fetch();
-                $this->uid = $data['id'];
-                $this->userName = $data['name'];
-                $this->isAdmin = $data['admin'];
-                $this->permissions = $p->getPermissions($data['id_permission']);
-
-                return true;
-            }
+        if (empty($_SESSION['token'])) {
+            return false;
         }
 
+        $token = $_SESSION['token'];
+
+        $sql = "SELECT 
+                    users.id AS id, 
+                    users.name AS name, 
+                    users.admin AS 'admin', 
+                    GROUP_CONCAT(p_items.slug SEPARATOR ',') AS permissions
+                FROM
+                    users
+                LEFT JOIN
+                    (permission_links AS p_links , permission_items AS p_items)
+                ON
+                    (p_links.id_permission_item = p_items.id AND p_links.id_permission_group = users.id_permission)
+                WHERE
+                    users.token = :token
+                GROUP BY users.id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':token', $token);
+        $sql->execute();
+
+        if ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->uid = $data['id'];
+            $this->userName = $data['name'];
+            $this->isAdmin = intval($data['admin']);
+            $this->permissions = explode(',', $data['permissions']);
+            return true;
+        }
         return false;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->userName;
     }
 
 
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
-        if ($this->isAdmin == '1') {
-            return true;
-        } else {
-            return false;
-        }
+        return ($this->isAdmin === Users::ADMIN);
     }
 
-    public function hasPermission($permission_slug)
+    public function hasPermission(string $permission_slug): bool
     {
-
-        if (in_array($permission_slug, $this->permissions)) {
-            return true;
-        } else {
-            return false;
-        }
+        return in_array($permission_slug, ($this->permissions) ?? array());
     }
 
-    public function validateLogin($email, $password)
+    public function validateLogin(string $email, string $password): bool
     {
 
-        $sql = "SELECT id FROM users WHERE email = :email AND password = :password AND users.admin = 1";
+        $sql = "SELECT id FROM users WHERE email = :email AND password = :password AND users.admin = " . Users::ADMIN;
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':email', $email);
         $sql->bindValue(':password', md5($password));
         $sql->execute();
 
-        if ($sql->rowCount() > 0) {
-            $data = $sql->fetch();
-
+        if ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
             $token = md5(time() . rand(0, 999) . $data['id'] . time());
 
             $sql = "UPDATE users SET token = :token WHERE id = :id";
@@ -94,12 +99,12 @@ class Users extends Model
         return false;
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->uid;
     }
 
-    private function buildGetFilterSql($filter)
+    private function buildGetFilterSql(array $filter): array
     {
         $sqlfilter = array();
 
@@ -114,7 +119,7 @@ class Users extends Model
         return $sqlfilter;
     }
 
-    private function buildGetFilterBind($filter, &$sql)
+    private function buildGetFilterBind(array $filter, PDOStatement &$sql): void
     {
         if (!empty($filter['name'])) {
             $sql->bindValue(':name', '%' . $filter['name'] . '%');
@@ -126,10 +131,8 @@ class Users extends Model
         }
     }
 
-    public function getTotal($filter = array())
+    public function getTotal($filter = array()): int
     {
-        $array = array();
-
         $sqlfilter = $this->buildGetFilterSql($filter);
 
         $sql = "SELECT COUNT(*) as c FROM users";
@@ -142,27 +145,22 @@ class Users extends Model
         $this->buildGetFilterBind($filter, $sql);
 
         $sql->execute();
-        $data = $sql->fetch();
 
-        return $data['c'];
+        return intval($sql->fetchColumn());
     }
 
     //Contagem de usuários
-    public function getAllUsersCount()
+    public function getAllUsersCount(): int
     {
-
         $sql = $this->db->query("SELECT COUNT(*) as c FROM users");
-        $row = $sql->fetch();
-        return $row['c'];
+        return intval($sql->fetchColumn());
     }
 
     //Contagem de usuários ativos
-    public function getAllUsersCountActive()
+    public function getAllUsersCountActive(): int
     {
-
-        $sql = $this->db->query("SELECT COUNT(*) as c FROM users WHERE users.admin = 1");
-        $row = $sql->fetch();
-        return $row['c'];
+        $sql = $this->db->query("SELECT COUNT(*) as c FROM users WHERE users.admin = " . Users::ADMIN);
+        return intval($sql->fetchColumn());
     }
 
      //Puxando dados do usuários para edição
@@ -202,14 +200,14 @@ class Users extends Model
         $sqlfilter = $this->buildGetFilterSql($filter);
 
         $sql = "SELECT
-		            users.id,
-		            users.name,
-		            users.email,
-		            users.admin,
-		            permission_groups.name as permission_name
-		        FROM users
-		        LEFT JOIN permission_groups
-		        ON permission_groups.id = users.id_permission";
+                    users.id,
+                    users.name,
+                    users.email,
+                    users.admin,
+                    permission_groups.name as permission_name
+                FROM users
+                LEFT JOIN permission_groups
+                ON permission_groups.id = users.id_permission";
 
         if (count($sqlfilter) > 0) {
             $sql .= " WHERE " . implode(' AND ', $sqlfilter);
@@ -239,11 +237,11 @@ class Users extends Model
 
         if ($sql->rowCount() == 0) {
             $sql = "INSERT INTO users SET
-			        name = :name,
-			        email = :email,
-			        id_permission = :id_permission,
-			        users.admin = :admin,
-			        password = :password";
+                    name = :name,
+                    email = :email,
+                    id_permission = :id_permission,
+                    users.admin = :admin,
+                    password = :password";
             $sql = $this->db->prepare($sql);
             $sql->bindValue(":name", $name);
             $sql->bindValue(":email", $email);
@@ -261,11 +259,11 @@ class Users extends Model
     public function editUser($name, $email, $id_permission, $admin, $id)
     {
         $sql = "UPDATE users SET
-		        name = :name,
-		        email = :email,
-		        id_permission = :id_permission,
-		        users.admin = :admin
-		        WHERE id = :id";
+                name = :name,
+                email = :email,
+                id_permission = :id_permission,
+                users.admin = :admin
+                WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":name", $name);
         $sql->bindValue(":email", $email);
