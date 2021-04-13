@@ -15,8 +15,24 @@
         <directory name="Controllers" />
         <directory name="Core" />
         <directory name="Models" />
+        <directory name="Views" />
         <ignoreFiles>
             <directory name="vendor" />
+            <file name="Views/management.php" />
+            <file name="Views/permissions.php" />
+            <file name="Views/permissions_add.php" />
+            <file name="Views/permissions_edit.php" />
+            <file name="Views/permissions_items.php" />
+            <file name="Views/permissions_items_add.php" />
+            <file name="Views/permissions_items_edit.php" />
+            <file name="Views/products.php" />
+            <file name="Views/products_edit.php" />
+            <file name="Views/services.php" />
+            <file name="Views/services_edit.php" />
+            <file name="Views/users.php" />
+            <file name="Views/users_add.php" />
+            <file name="Views/users_edit.php" />
+            <file name="Views/users_new_pass.php" />
             <!-- Ignoring Template file scope error-->
             <file name="Views/template.php" />
         </ignoreFiles>
