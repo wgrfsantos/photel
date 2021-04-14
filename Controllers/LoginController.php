@@ -8,7 +8,7 @@ use Models\Users;
 class LoginController extends Controller
 {
 
-    public function index()
+    public function index(): void
     {
         $array = array(
             'error' => ''
@@ -22,7 +22,7 @@ class LoginController extends Controller
         $this->loadView('login', $array);
     }
 
-    public function index_action()
+    public function index_action(): void
     {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
@@ -39,10 +39,12 @@ class LoginController extends Controller
         exit;
     }
 
-    public function logout()
+    /**
+     * Desloga o usuário limpando a Sessão
+     */
+    public function logout(): void
     {
-
-        unset($_SESSION['token']);
+        $_SESSION = array();
         header("Location: " . BASE_URL);
         exit;
     }
