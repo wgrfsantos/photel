@@ -7,7 +7,7 @@ if (ENVIRONMENT == 'development') {
     define("BASE_URL", "http://localhost/photel/");
     define("BASE_URL_SITE", "http://localhost/photel/");
     define("PATH_SITE", "../photel/");
-    $config['dbname'] = 'hpj';
+    $config['dbname'] = 'photel';
     $config['host'] = 'localhost';
     $config['dbuser'] = 'root';
     $config['dbpass'] = '';
